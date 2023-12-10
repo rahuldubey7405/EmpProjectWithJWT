@@ -68,13 +68,13 @@ public class EmployeeController {
 	@DeleteMapping(value = "/employee/{employeeId}")
 	public ResponseEntity deleteEmployee(@PathVariable(required = true) int employeeId) {
 		employeeService.DeleteEmployee(employeeId);
-		return new ResponseEntity("", HttpStatus.OK);
+		return new ResponseEntity("", HttpStatus.OK);// security purpose
 	}
 
-//	@DeleteMapping(value = "/employee/{employeeId}")
-//	public ResponseEntity Harddelete(@PathVariable(required = true) int employeeId) {
-//		employeeService.DeleteEmployee(employeeId);
-//		return new ResponseEntity("", HttpStatus.OK);
-//	}
+	@DeleteMapping(value = "/harddelete/employee/{employeeId}")
+	public ResponseEntity Harddelete(@PathVariable(required = true) int employeeId) throws Exception {
+		employeeService.HardDelete(employeeId);
+		return new ResponseEntity("", HttpStatus.OK);// security purpose
+	}
 
 }

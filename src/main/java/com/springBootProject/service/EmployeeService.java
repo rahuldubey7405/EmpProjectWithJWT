@@ -1,5 +1,10 @@
 package com.springBootProject.service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +34,6 @@ public class EmployeeService {
 		return employeeRepository.save(emp);
 	}
 
-	// HardDelete Or FostDelete
-	public void DeleteEmployee(int empId) {
-		employeeRepository.deleteById(empId);
-	}
-
 	public Employee GetEmployeeById(int empId) {
 		try {
 			return employeeRepository.findById(empId).get();
@@ -44,10 +44,25 @@ public class EmployeeService {
 
 	public List<Employee> GetEmployeeByDepatment(String department) {
 		List<Employee> findByDepartment = employeeRepository.findByDepartment(department);
-//		for(Employee e :findByDepartment) {
-//			
-//		}
 		return findByDepartment;
+	}
+
+	// HardDelete Or FostDelete
+	public void DeleteEmployee(int empId) {
+		employeeRepository.deleteById(empId);
+	}
+
+	public void HardDelete(int empId) throws SQLException, ClassNotFoundException {
+		String sql = "delete from employee where id = ?";
+		final String JDBC_URL = "jdbc:mysql://localhost:3306/springdata";
+		final String USERNAME = "root";
+		final String PASSWORD = "Rahul@1234";
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+		PreparedStatement pr = con.prepareStatement(sql);
+		pr.setInt(1, empId);
+		pr.executeUpdate();
+		con.close();
 
 	}
 }

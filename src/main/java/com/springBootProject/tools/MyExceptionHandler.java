@@ -46,7 +46,7 @@ public class MyExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public ResponseEntity<String> handleAllExceptions(Exception ex, WebRequest request) {
 		ApiErrorRespose error = new ApiErrorRespose();
-		error.setError("Null pointer exception has occured!!");
+		error.setError("something went wrong!!");
 		error.setErrorMessage(ex.getMessage());
 		error.setStatus(500);
 		error.setTimeStamp(LocalDateTime.now().toString());
