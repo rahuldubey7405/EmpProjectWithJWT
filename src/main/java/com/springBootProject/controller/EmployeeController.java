@@ -70,7 +70,7 @@ public class EmployeeController {
 		employeeService.DeleteEmployee(employeeId);
 		return new ResponseEntity("", HttpStatus.OK);// security purpose
 	}
-
+	// This methods work with Hard DELETE
 	@DeleteMapping(value = "/harddelete/employee/{employeeId}")
 	public ResponseEntity Harddelete(@PathVariable(required = true) int employeeId) throws Exception {
 		employeeService.HardDelete(employeeId);
